@@ -1,0 +1,17 @@
+{
+  "name": "Nuxt on Docker",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "../docker-compose.development.yml"
+  ],
+  "service": "app",
+  "workspaceFolder": "/home/node/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "Vue.volar"
+      ]
+    }
+  }
+}
