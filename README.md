@@ -18,7 +18,7 @@ npx nuxi init . --force
 4. VSCode がコンテナ内で起動します。  
     ウィンドウ左下が以下の表示になっていれば完了です。  
     ![image](https://github.com/takayuki-miyazaki-adglobe-co-jp/nuxt-on-docker-template/assets/105618751/44f4c3c8-9cb5-4c3a-97a0-637568aa4fd5)
-5. コンテナ起動と同時に Nuxt が起動するように設定しているため `http://localhost:3000` に接続できます。
+5. コンテナ起動と同時に Nuxt が起動するように設定しているため http://localhost:3000 に接続できます。
 
 > **Note**
 >
@@ -44,7 +44,7 @@ npx nuxi init . --force
 docker compose down --volumes --rmi all
 docker compose up -d
 ```
-開発用コンテナと同様、コンテナ起動と同時に Nuxt が起動するように設定しているため `http://localhost:3000` に接続できます。
+開発用コンテナと同様、コンテナ起動と同時に Nuxt が起動するように設定しているため http://localhost:3000 に接続できます。
 
 > **Note**
 >
