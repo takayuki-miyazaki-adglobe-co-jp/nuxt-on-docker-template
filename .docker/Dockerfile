@@ -1,7 +1,8 @@
 ARG NODE_ENV
+ARG NODE_MAJOR_VERSION
 
 # ベースステージ
-FROM node:18 as base
+FROM node:${NODE_MAJOR_VERSION} as base
 
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /home/node/workspace
@@ -41,7 +42,7 @@ COPY --chown=node:node . ./
 RUN yarn build
 
 # 本番用ステージ
-FROM gcr.io/distroless/nodejs18-debian11:nonroot as production
+FROM gcr.io/distroless/nodejs${NODE_MAJOR_VERSION}-debian11:nonroot as production
 
 WORKDIR /app
 USER nonroot
