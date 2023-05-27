@@ -5,24 +5,35 @@ FROM node:18 as base
 
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /home/node/workspace
-RUN chown node:node . && \
-    mkdir node_modules && \
-    chown node:node node_modules
-
-USER node:node
+RUN mkdir node_modules && \
+    chown node:node -R .
 
 # 開発用ステージ
 FROM base as development
 
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y locales && \
+    echo "ja_JP.UTF-8 UTF-8" > /etc/locale.gen && \
+    locale-gen ja_JP.UTF-8 && \
+    dpkg-reconfigure locales && \
+    /usr/sbin/update-locale LANG=ja_JP.UTF-8
+
+ENV LC_ALL=ja_JP.UTF-8
+
+USER node:node
+
 COPY --chown=node:node package.json yarn.lock ./
 RUN yarn global add nuxi nuxt3 && \
-    yarn install && \
-    git config --global --add safe.directory /home/node/workspace
+    yarn install
 
 ENTRYPOINT ["yarn", "dev"]
 
 # ビルダーステージ
 FROM base as builder
+
+USER node:node
 
 COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install
